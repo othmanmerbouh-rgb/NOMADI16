@@ -1,0 +1,16 @@
+function addToCart(name, price) {
+  const existing = cart.find(item => item.name === name);
+  if (existing) existing.qty++;
+  else cart.push({name, price, qty:1});
+  
+  playClickSound();
+  
+  const productDiv = document.querySelector(`[data-product="${name}"]`);
+  if (productDiv) {
+    productDiv.classList.add('add-animation');
+    setTimeout(() => productDiv.classList.remove('add-animation'), 500);
+  }
+  
+  updateCart();
+  updateProductControls(name);
+}
